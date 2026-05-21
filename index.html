@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OPUS WEALTH | Luxury Wealth Management for Business Owners & Families</title>
+  <meta name="description" content="OPUS WEALTH delivers premium wealth management, tax-efficient planning, retirement strategy, and legacy building for entrepreneurs, executives, and affluent families." />
+  <meta name="keywords" content="wealth management, retirement planning, tax strategies for business owners, wealth preservation, purchasing power protection, fiduciary financial advisor, legacy planning, investment management" />
+  <meta property="og:title" content="OPUS WEALTH | Preserve What You've Built. Grow What's Possible." />
+  <meta property="og:description" content="A modern private wealth experience for business owners, executives, and families focused on preserving purchasing power and building lasting legacy." />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#071B34" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            navy: '#071B34',
+            navySoft: '#0B2448',
+            gold: '#C8A96B',
+            goldSoft: '#E5C78A',
+            slate: '#5F6B7A',
+            ivory: '#F7F6F3'
+          },
+          fontFamily: {
+            display: ['Cormorant Garamond', 'serif'],
+            body: ['Inter', 'sans-serif']
+          },
+          boxShadow: {
+            glass: '0 10px 30px rgba(3, 11, 24, 0.35)',
+            glow: '0 0 0 1px rgba(229,199,138,0.16), 0 24px 80px rgba(0,0,0,0.35)'
+          },
+          backgroundImage: {
+            'gold-line': 'linear-gradient(90deg, rgba(200,169,107,0), rgba(200,169,107,0.8), rgba(200,169,107,0))'
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/framer-motion@11.0.8/dist/framer-motion.js" defer></script>
+  <style>
+    :root {
+      --navy: #071B34;
+      --navy-soft: #0B2448;
+      --gold: #C8A96B;
+      --gold-soft: #E5C78A;
+      --white: #FFFFFF;
+      --slate: #5F6B7A;
+      --glass: rgba(255,255,255,0.08);
+      --glass-border: rgba(255,255,255,0.12);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background:
+        radial-gradient(circle at 15% 20%, rgba(229,199,138,0.12), transparent 25%),
+        radial-gradient(circle at 85% 10%, rgba(200,169,107,0.14), transparent 22%),
+        linear-gradient(180deg, #071B34 0%, #08172B 42%, #06111E 100%);
+      color: #fff;
+      overflow-x: hidden;
+    }
+    .glass {
+      background: rgba(255,255,255,0.06);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+    }
+    .gold-border { border: 1px solid rgba(200,169,107,0.35); }
+    .section-glow::before {
+      content: '';
+      position: absolute;
+      inset: auto -10% -15% auto;
+      width: 22rem;
+      height: 22rem;
+      border-radius: 999px;
+      background: radial-gradient(circle, rgba(229,199,138,0.15), transparent 70%);
+      pointer-events: none;
+      filter: blur(30px);
+    }
+    .hero-grid {
+      background-image:
+        linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+      background-size: 80px 80px;
+    }
+    .gold-line {
+      position: relative;
+      overflow: hidden;
+    }
+    .gold-line::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent, rgba(229,199,138,0.75), transparent);
+      transform: translateX(-120%);
+      animation: shimmer 4s infinite;
+    }
+    @keyframes shimmer {
+      100% { transform: translateX(120%); }
+    }
+    @keyframes float {
+      0%,100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+    @keyframes pulseGlow {
+      0%,100% { box-shadow: 0 0 0 0 rgba(200,169,107,0.18); }
+      50% { box-shadow: 0 0 0 16px rgba(200,169,107,0); }
+    }
+    .float { animation: float 6s ease-in-out infinite; }
+    .pulse-ring { animation: pulseGlow 3.2s infinite; }
+    .service-card:hover, .insight-card:hover, .testimonial-card:hover { transform: translateY(-6px); }
+    .service-card, .insight-card, .testimonial-card, .metric-card { transition: transform .35s ease, border-color .35s ease, background .35s ease; }
+    .service-card:hover { border-color: rgba(229,199,138,0.5); background: rgba(255,255,255,0.08); }
+    .gradient-text {
+      background: linear-gradient(180deg, #fff 10%, #E5C78A 160%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .chart-wrap canvas { width: 100% !important; height: 100% !important; }
+    .news-scroll { scrollbar-width: thin; scrollbar-color: rgba(200,169,107,0.5) transparent; }
+    .news-scroll::-webkit-scrollbar { height: 8px; }
+    .news-scroll::-webkit-scrollbar-thumb { background: rgba(200,169,107,0.35); border-radius: 999px; }
+    .reveal { opacity: 0; transform: translateY(24px); transition: all .9s cubic-bezier(.16,1,.3,1); }
+    .reveal.active { opacity: 1; transform: translateY(0); }
+    .number { font-variant-numeric: tabular-nums; }
+    .logo-shell img { object-fit: contain; }
+    .luxury-photo {
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02)),
+        url('https://picsum.photos/seed/opus-wealth-luxury/1200/900');
+      background-size: cover;
+      background-position: center;
+    }
+    .wealth-photo {
+      background:
+        linear-gradient(135deg, rgba(7,27,52,0.25), rgba(7,27,52,0.7)),
+        url('https://picsum.photos/seed/opus-family-legacy/1200/900');
+      background-size: cover;
+      background-position: center;
+    }
+    .hero-photo {
+      background:
+        linear-gradient(135deg, rgba(7,27,52,0.12), rgba(7,27,52,0.62)),
+        url('https://picsum.photos/seed/opus-boardroom/1400/1000');
+      background-size: cover;
+      background-position: center;
+    }
+    @media (max-width: 768px) {
+      .hero-photo, .luxury-photo, .wealth-photo { min-height: 22rem; }
+    }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FinancialService",
+    "name": "OPUS WEALTH",
+    "description": "Wealth management, tax strategy, retirement planning, purchasing power protection, and legacy planning for business owners and affluent families.",
+    "areaServed": "United States",
+    "serviceType": ["Wealth Management", "Retirement Planning", "Tax Strategy", "Estate Planning", "Investment Advisory"],
+    "audience": {
+      "@type": "Audience",
+      "audienceType": ["Business Owners", "Entrepreneurs", "Executives", "Affluent Families"]
+    }
+  }
+  </script>
+</head>
+<body class="selection:bg-gold/20 selection:text-white">
+  <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-white focus:px-4 focus:py-2 focus:text-navy">Skip to content</a>
+
+  <header class="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-navy/55 backdrop-blur-xl">
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-10">
+      <div class="flex items-center gap-4">
+        <div class="logo-shell flex h-12 w-12 items-center justify-center overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-2">
+          <img src="./opus-logo.jpeg" alt="OPUS WEALTH logo" width="48" height="48" onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=\'font-display text-2xl text-gold\'>O</span>'" />
+        </div>
+        <div>
+          <div class="font-display text-2xl tracking-[0.18em] text-white">OPUS WEALTH</div>
+          <div class="text-[11px] uppercase tracking-[0.35em] text-white/55">Private wealth strategy</div>
+        </div>
+      </div>
+      <nav class="hidden items-center gap-8 text-sm text-white/80 lg:flex">
+        <a href="#services" class="hover:text-goldSoft">Services</a>
+        <a href="#calculator" class="hover:text-goldSoft">Retirement Planner</a>
+        <a href="#insights" class="hover:text-goldSoft">Insights</a>
+        <a href="#experience" class="hover:text-goldSoft">Client Experience</a>
+        <a href="#booking" class="rounded-full border border-gold/40 px-5 py-2 text-goldSoft hover:bg-gold/10">Schedule Consultation</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="pt-24">
+    <section class="hero-grid relative overflow-hidden px-6 pb-24 pt-10 lg:px-10 lg:pb-32 lg:pt-14">
+      <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(229,199,138,0.16),transparent_28%),radial-gradient(circle_at_10%_30%,rgba(255,255,255,0.06),transparent_18%)]"></div>
+      <div class="mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[1.1fr_.9fr]">
+        <div class="relative z-10 reveal">
+          <div class="mb-6 inline-flex items-center gap-3 rounded-full border border-gold/30 bg-white/5 px-4 py-2 text-xs uppercase tracking-[0.35em] text-goldSoft">
+            <span class="h-2 w-2 rounded-full bg-gold pulse-ring"></span>
+            Fiduciary wealth counsel for builders
+          </div>
+          <h1 class="max-w-4xl font-display text-6xl leading-[0.94] text-white md:text-7xl xl:text-[6.4rem]">
+            Preserve What You’ve Built.<br><span class="gradient-text">Grow What’s Possible.</span>
+          </h1>
+          <p class="mt-6 max-w-2xl text-lg leading-8 text-white/78 md:text-xl">
+            Strategic wealth management, tax-efficient planning, and investment guidance designed for business owners and families who want more than average financial advice.
+          </p>
+          <div class="mt-10 flex flex-col gap-4 sm:flex-row">
+            <a href="#booking" class="gold-line inline-flex items-center justify-center rounded-full bg-gold px-7 py-4 text-sm font-semibold uppercase tracking-[0.2em] text-navy transition hover:bg-goldSoft">Schedule Consultation</a>
+            <a href="#strategies" class="inline-flex items-center justify-center rounded-full border border-white/15 bg-white/5 px-7 py-4 text-sm font-medium uppercase tracking-[0.2em] text-white transition hover:border-gold/40 hover:bg-white/10">Explore Strategies</a>
+          </div>
+          <div class="mt-10 grid max-w-2xl gap-4 sm:grid-cols-3">
+            <div class="metric-card glass rounded-3xl p-5">
+              <div class="text-xs uppercase tracking-[0.3em] text-white/45">Planning lens</div>
+              <div class="mt-2 font-display text-3xl text-goldSoft">Tax-aware</div>
+              <p class="mt-2 text-sm text-white/65">Every recommendation considers after-tax outcomes and long-term purchasing power.</p>
+            </div>
+            <div class="metric-card glass rounded-3xl p-5">
+              <div class="text-xs uppercase tracking-[0.3em] text-white/45">Client fit</div>
+              <div class="mt-2 font-display text-3xl text-goldSoft">Builders</div>
+              <p class="mt-2 text-sm text-white/65">Entrepreneurs, executives, and affluent families with complex financial decisions.</p>
+            </div>
+            <div class="metric-card glass rounded-3xl p-5">
+              <div class="text-xs uppercase tracking-[0.3em] text-white/45">Mission</div>
+              <div class="mt-2 font-display text-3xl text-goldSoft">Legacy</div>
+              <p class="mt-2 text-sm text-white/65">Protection, clarity, and multi-generational strategy built around what matters most.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="relative reveal">
+          <div class="hero-photo relative overflow-hidden rounded-[2rem] border border-white/10 shadow-glow">
+            <div class="grid min-h-[42rem] grid-rows-[1fr_auto] p-6 md:p-8">
+              <div class="flex items-start justify-between">
+                <div class="glass max-w-xs rounded-3xl p-4">
+                  <div class="text-xs uppercase tracking-[0.35em] text-white/50">Private strategy view</div>
+                  <div class="mt-3 text-2xl font-semibold text-white">Your financial future elevated.</div>
+                  <div class="mt-4 h-px w-full bg-gold-line"></div>
+                  <div class="mt-4 grid grid-cols-2 gap-4 text-sm text-white/75">
+                    <div><span class="block text-xs uppercase tracking-[0.25em] text-white/40">Protection</span>Purchasing power</div>
+                    <div><span class="block text-xs uppercase tracking-[0.25em] text-white/40">Structure</span>Tax efficiency</div>
+                  </div>
+                </div>
+                <div class="float glass hidden rounded-3xl p-4 md:block">
+                  <div class="text-xs uppercase tracking-[0.3em] text-white/45">Confidence signal</div>
+                  <div class="mt-2 font-display text-4xl text-goldSoft">+29%</div>
+                  <div class="text-sm text-white/65">Potential after-tax improvement with disciplined optimization</div>
+                </div>
+              </div>
+              <div class="grid gap-5 md:grid-cols-[1.1fr_.9fr]">
+                <div class="glass rounded-[1.75rem] p-5">
+                  <div class="mb-4 flex items-center justify-between">
+                    <div>
+                      <div class="text-xs uppercase tracking-[0.28em] text-white/45">Wealth momentum</div>
+                      <div class="text-xl font-semibold text-white">Projected Net Worth Trajectory</div>
+                    </div>
+                    <div class="rounded-full border border-gold/30 px-3 py-1 text-xs text-goldSoft">Live scenario</div>
+                  </div>
+                  <div class="chart-wrap h-52"><canvas id="heroChart"></canvas></div>
+                </div>
+                <div class="glass rounded-[1.75rem] p-5">
+                  <div class="text-xs uppercase tracking-[0.28em] text-white/45">Trust focus</div>
+                  <div class="mt-2 space-y-4 text-sm text-white/75">
+                    <div class="flex items-start gap-3"><span class="mt-1 h-2.5 w-2.5 rounded-full bg-gold"></span><span>Secure, fiduciary-centered planning process built around long-term relationships.</span></div>
+                    <div class="flex items-start gap-3"><span class="mt-1 h-2.5 w-2.5 rounded-full bg-gold"></span><span>Clear recommendations shaped by taxes, inflation, and estate consequences.</span></div>
+                    <div class="flex items-start gap-3"><span class="mt-1 h-2.5 w-2.5 rounded-full bg-gold"></span><span>Elegant dashboards that turn complexity into confident decisions.</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="relative px-6 py-14 lg:px-10">
+      <div class="mx-auto max-w-7xl reveal rounded-[2rem] border border-white/10 bg-white/[0.035] p-8 lg:p-10">
+        <div class="grid gap-8 lg:grid-cols-[.95fr_1.05fr] lg:items-center">
+          <div>
+            <p class="text-xs uppercase tracking-[0.35em] text-goldSoft">Trust & credibility</p>
+            <h2 class="mt-3 max-w-xl font-display text-5xl text-white">The discipline of a private bank with the clarity of a modern advisory platform.</h2>
+            <p class="mt-5 max-w-xl text-white/72">We lead with fiduciary responsibility, client-first guidance, secure planning processes, and investment strategies designed to be intelligent after taxes, not just before them.</p>
+          </div>
+          <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <div class="glass rounded-3xl p-5"><div class="text-goldSoft">◦</div><div class="mt-3 font-semibold">Retirement Planning</div><div class="mt-2 text-sm text-white/65">Cash-flow durability and lifestyle readiness.</div></div>
+            <div class="glass rounded-3xl p-5"><div class="text-goldSoft">◦</div><div class="mt-3 font-semibold">Tax Strategy</div><div class="mt-2 text-sm text-white/65">Integrated, forward-looking tax planning.</div></div>
+            <div class="glass rounded-3xl p-5"><div class="text-goldSoft">◦</div><div class="mt-3 font-semibold">Estate Planning</div><div class="mt-2 text-sm text-white/65">Generational coordination and legacy design.</div></div>
+            <div class="glass rounded-3xl p-5"><div class="text-goldSoft">◦</div><div class="mt-3 font-semibold">Business Owner Advisory</div><div class="mt-2 text-sm text-white/65">Entity transitions, liquidity, and risk alignment.</div></div>
+            <div class="glass rounded-3xl p-5"><div class="text-goldSoft">◦</div><div class="mt-3 font-semibold">Wealth Preservation</div><div class="mt-2 text-sm text-white/65">Defensive positioning without losing momentum.</div></div>
+            <div class="glass rounded-3xl p-5"><div class="text-goldSoft">◦</div><div class="mt-3 font-semibold">Investment Management</div><div class="mt-2 text-sm text-white/65">Purpose-built portfolios matched to real objectives.</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="services" class="px-6 py-20 lg:px-10">
+      <div class="mx-auto max-w-7xl">
+        <div class="reveal flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
+          <div>
+            <p class="text-xs uppercase tracking-[0.35em] text-goldSoft">Core capabilities</p>
+            <h2 class="mt-3 font-display text-5xl text-white">Advisory built for complex wealth.</h2>
+          </div>
+          <p class="max-w-2xl text-white/68">Each engagement blends strategy, stewardship, and execution support so your balance sheet, family goals, tax picture, and long-term vision all move in the same direction.</p>
+        </div>
+        <div class="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+          <article class="service-card glass rounded-[1.75rem] p-6"><div class="text-xs uppercase tracking-[0.28em] text-goldSoft">01</div><h3 class="mt-4 text-2xl font-semibold">Wealth Management</h3><p class="mt-3 text-sm text-white/68">Coordinated portfolio construction, cash management, and planning aligned to your actual life goals.</p><a href="#booking" class="mt-6 inline-flex text-sm text-goldSoft">Discuss strategy →</a></article>
+          <article class="service-card glass rounded-[1.75rem] p-6"><div class="text-xs uppercase tracking-[0.28em] text-goldSoft">02</div><h3 class="mt-4 text-2xl font-semibold">Tax-Efficient Strategies</h3><p class="mt-3 text-sm text-white/68">Reduce unnecessary drag with asset location, withdrawal sequencing, and coordinated planning.</p><a href="#booking" class="mt-6 inline-flex text-sm text-goldSoft">View opportunities →</a></article>
+          <article class="service-card glass rounded-[1.75rem] p-6"><div class="text-xs uppercase tracking-[0.28em] text-goldSoft">03</div><h3 class="mt-4 text-2xl font-semibold">Retirement Planning</h3><p class="mt-3 text-sm text-white/68">Model income longevity, inflation stress, and spending confidence well beyond retirement date.</p><a href="#calculator" class="mt-6 inline-flex text-sm text-goldSoft">Run projection →</a></article>
+          <article class="service-card glass rounded-[1.75rem] p-6"><div class="text-xs uppercase tracking-[0.28em] text-goldSoft">04</div><h3 class="mt-4 text-2xl font-semibold">Business Exit Planning</h3><p class="mt-3 text-sm text-white/68">Turn concentrated enterprise value into enduring personal wealth with thoughtful transition planning.</p><a href="#booking" class="mt-6 inline-flex text-sm text-goldSoft">Plan your exit →</a></article>
+          <article class="service-card glass rounded-[1.75rem] p-6"><div class="text-xs uppercase tracking-[0.28em] text-goldSoft">05</div><h3 class="mt-4 text-2xl font-semibold">Estate & Legacy Planning</h3><p class="mt-3 text-sm text-white/68">Align trusts, philanthropy, family conversations, and wealth transfer around your values.</p><a href="#experience" class="mt-6 inline-flex text-sm text-goldSoft">Design legacy →</a></article>
+          <article class="service-card glass rounded-[1.75rem] p-6"><div class="text-xs uppercase tracking-[0.28em] text-goldSoft">06</div><h3 class="mt-4 text-2xl font-semibold">Investment Advisory</h3><p class="mt-3 text-sm text-white/68">Strategic asset allocation informed by risk capacity, tax realities, and long-term purchasing power.</p><a href="#booking" class="mt-6 inline-flex text-sm text-goldSoft">Review portfolio →</a></article>
+          <article class="service-card glass rounded-[1.75rem] p-6"><div class="text-xs uppercase tracking-[0.28em] text-goldSoft">07</div><h3 class="mt-4 text-2xl font-semibold">Risk Management</h3><p class="mt-3 text-sm text-white/68">Stress test your plan against market volatility, concentration risk, and unexpected life events.</p><a href="#tax-power" class="mt-6 inline-flex text-sm text-goldSoft">See the risks →</a></article>
+          <article class="service-card glass rounded-[1.75rem] p-6"><div class="text-xs uppercase tracking-[0.28em] text-goldSoft">08</div><h3 class="mt-4 text-2xl font-semibold">Family Wealth Strategy</h3><p class="mt-3 text-sm text-white/68">Create shared understanding across generations with governance, education, and ongoing stewardship.</p><a href="#booking" class="mt-6 inline-flex text-sm text-goldSoft">Start the dialogue →</a></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="calculator" class="relative px-6 py-20 lg:px-10">
+      <div class="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[.95fr_1.05fr]">
+        <div class="reveal">
+          <p class="text-xs uppercase tracking-[0.35em] text-goldSoft">Retirement calculator</p>
+          <h2 class="mt-3 font-display text-5xl text-white">Plan retirement with purchasing power in view.</h2>
+          <p class="mt-5 max-w-xl text-white/70">This planner estimates future balance, inflation-adjusted purchasing power, and a simple confidence score based on savings consistency, timeline, and real return assumptions.</p>
+          <div class="mt-8 luxury-photo rounded-[2rem] border border-white/10 p-8">
+            <div class="max-w-sm glass rounded-[1.5rem] p-5">
+              <div class="text-xs uppercase tracking-[0.3em] text-white/45">Planning philosophy</div>
+              <p class="mt-3 text-sm leading-7 text-white/80">Sophisticated planning should feel calming, not spreadsheet-heavy. Every number here is presented with editorial clarity and decision-ready framing.</p>
+            </div>
+          </div>
+        </div>
+        <div class="glass reveal rounded-[2rem] p-6 lg:p-8">
+          <div class="grid gap-4 md:grid-cols-2">
+            <label class="text-sm text-white/70">Current age<input id="currentAge" type="number" class="mt-2 w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-white outline-none focus:border-gold/50" value="42"></label>
+            <label class="text-sm text-white/70">Retirement age<input id="retireAge" type="number" class="mt-2 w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-white outline-none focus:border-gold/50" value="65"></label>
+            <label class="text-sm text-white/70">Annual income<input id="annualIncome" type="number" class="mt-2 w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-white outline-none focus:border-gold/50" value="350000"></label>
+            <label class="text-sm text-white/70">Annual savings<input id="annualSavings" type="number" class="mt-2 w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-white outline-none focus:border-gold/50" value="70000"></label>
+            <label class="text-sm text-white/70">Investment growth rate %<input id="growthRate" type="number" step="0.1" class="mt-2 w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-white outline-none focus:border-gold/50" value="7.2"></label>
+            <label class="text-sm text-white/70">Inflation rate %<input id="inflationRate" type="number" step="0.1" class="mt-2 w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-white outline-none focus:border-gold/50" value="2.8"></label>
+            <label class="text-sm text-white/70 md:col-span-2">Retirement spending target / year<input id="spendTarget" type="number" class="mt-2 w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-white outline-none focus:border-gold/50" value="220000"></label>
+          </div>
+          <button id="calcBtn" class="mt-5 w-full rounded-full bg-gold px-6 py-4 text-sm font-semibold uppercase tracking-[0.18em] text-navy">Update projection</button>
+          <div class="mt-6 grid gap-4 md:grid-cols-3">
+            <div class="rounded-[1.5rem] border border-white/10 bg-white/5 p-4"><div class="text-xs uppercase tracking-[0.24em] text-white/45">Projected balance</div><div id="projectedBalance" class="number mt-3 font-display text-4xl text-goldSoft"></div></div>
+            <div class="rounded-[1.5rem] border border-white/10 bg-white/5 p-4"><div class="text-xs uppercase tracking-[0.24em] text-white/45">Purchasing power</div><div id="purchasingPower" class="number mt-3 font-display text-4xl text-goldSoft"></div></div>
+            <div class="rounded-[1.5rem] border border-white/10 bg-white/5 p-4"><div class="text-xs uppercase tracking-[0.24em] text-white/45">Confidence score</div><div id="probability" class="number mt-3 font-display text-4xl text-goldSoft"></div></div>
+          </div>
+          <div class="mt-6 grid gap-5 lg:grid-cols-2">
+            <div class="rounded-[1.5rem] border border-white/10 bg-white/5 p-4"><div class="mb-3 text-sm text-white/65">Balance growth</div><div class="chart-wrap h-56"><canvas id="retirementChart"></canvas></div></div>
+            <div class="rounded-[1.5rem] border border-white/10 bg-white/5 p-4"><div class="mb-3 text-sm text-white/65">Future spending sustainability</div><div class="chart-wrap h-56"><canvas id="incomeChart"></canvas></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="tax-power" class="px-6 py-20 lg:px-10">
+      <div class="mx-auto max-w-7xl rounded-[2rem] border border-white/10 bg-white/[0.035] p-8 lg:p-10">
+        <div class="reveal grid gap-10 lg:grid-cols-[.95fr_1.05fr] lg:items-center">
+          <div>
+            <p class="text-xs uppercase tracking-[0.35em] text-goldSoft">Taxes & purchasing power</p>
+            <h2 class="mt-3 max-w-xl font-display text-5xl text-white">Growing wealth matters. Keeping it matters more.</h2>
+            <p class="mt-5 max-w-xl text-white/70">Inflation and tax drag rarely arrive with drama. They work quietly in the background, eroding what your money can actually do unless your strategy is actively managed.</p>
+            <div class="mt-8 grid gap-4 sm:grid-cols-2">
+              <div class="glass rounded-[1.5rem] p-5"><div class="text-xs uppercase tracking-[0.24em] text-white/45">Unmanaged</div><div class="mt-3 text-3xl font-display text-white">Portfolio growth</div><p class="mt-2 text-sm text-white/65">Nominal returns can look strong while after-tax, after-inflation reality weakens.</p></div>
+              <div class="glass rounded-[1.5rem] p-5"><div class="text-xs uppercase tracking-[0.24em] text-white/45">Optimized</div><div class="mt-3 text-3xl font-display text-goldSoft">Strategic retention</div><p class="mt-2 text-sm text-white/65">Tax-aware positioning and disciplined rebalancing can preserve more spending power over time.</p></div>
+            </div>
+          </div>
+          <div class="grid gap-5">
+            <div class="rounded-[1.75rem] border border-white/10 bg-white/5 p-5">
+              <div class="mb-4 flex items-center justify-between"><div><div class="text-xs uppercase tracking-[0.25em] text-white/45">Inflation comparison</div><div class="text-xl font-semibold">Real spending power over 20 years</div></div><div class="rounded-full border border-gold/30 px-3 py-1 text-xs text-goldSoft">Silent erosion</div></div>
+              <div class="chart-wrap h-64"><canvas id="inflationChart"></canvas></div>
+            </div>
+            <div class="rounded-[1.75rem] border border-white/10 bg-white/5 p-5">
+              <div class="mb-4 flex items-center justify-between"><div><div class="text-xs uppercase tracking-[0.25em] text-white/45">Tax drag example</div><div class="text-xl font-semibold">Unmanaged vs optimized outcomes</div></div><div class="rounded-full border border-gold/30 px-3 py-1 text-xs text-goldSoft">20-year view</div></div>
+              <div class="chart-wrap h-64"><canvas id="taxChart"></canvas></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="insights" class="px-6 py-20 lg:px-10">
+      <div class="mx-auto max-w-7xl">
+        <div class="reveal flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+          <div>
+            <p class="text-xs uppercase tracking-[0.35em] text-goldSoft">News & insights</p>
+            <h2 class="mt-3 font-display text-5xl text-white">A dynamic content hub built for decision-makers.</h2>
+          </div>
+          <div class="max-w-2xl text-white/68">This section highlights market commentary, tax updates, retirement planning perspectives, and business-owner insights in a refined editorial format.</div>
+        </div>
+        <div class="mt-6 flex flex-wrap gap-3 text-xs uppercase tracking-[0.25em] text-white/55">
+          <span class="rounded-full border border-white/10 px-4 py-2">Markets</span><span class="rounded-full border border-white/10 px-4 py-2">Taxes</span><span class="rounded-full border border-white/10 px-4 py-2">Retirement</span><span class="rounded-full border border-white/10 px-4 py-2">Business Owners</span><span class="rounded-full border border-white/10 px-4 py-2">Estate Planning</span><span class="rounded-full border border-white/10 px-4 py-2">Economic Trends</span>
+        </div>
+        <div class="news-scroll mt-10 grid auto-cols-[85%] grid-flow-col gap-5 overflow-x-auto pb-3 md:auto-cols-[42%] xl:auto-cols-[30%]">
+          <article class="insight-card glass rounded-[1.75rem] p-6"><div class="text-xs uppercase tracking-[0.25em] text-goldSoft">Featured commentary</div><h3 class="mt-4 text-2xl font-semibold">How high earners can coordinate tax strategy with retirement contributions</h3><p class="mt-3 text-sm text-white/65">A flagship article format with room for author metadata, featured image, summary, and category schema.</p><div class="mt-6 text-sm text-goldSoft">Read article →</div></article>
+          <article class="insight-card glass rounded-[1.75rem] p-6"><div class="text-xs uppercase tracking-[0.25em] text-goldSoft">Macro note</div><h3 class="mt-4 text-2xl font-semibold">Inflation resilience: why nominal growth is not enough</h3><p class="mt-3 text-sm text-white/65">An editorial card built for economic analysis, charts, and newsletter distribution.</p><div class="mt-6 text-sm text-goldSoft">View outlook →</div></article>
+          <article class="insight-card glass rounded-[1.75rem] p-6"><div class="text-xs uppercase tracking-[0.25em] text-goldSoft">Business owners</div><h3 class="mt-4 text-2xl font-semibold">Designing an exit plan before a buyer appears</h3><p class="mt-3 text-sm text-white/65">A high-intent content path for entrepreneurs considering liquidity events and succession.</p><div class="mt-6 text-sm text-goldSoft">Explore strategy →</div></article>
+          <article class="insight-card glass rounded-[1.75rem] p-6"><div class="text-xs uppercase tracking-[0.25em] text-goldSoft">Estate planning</div><h3 class="mt-4 text-2xl font-semibold">Legacy structures that preserve both family harmony and capital</h3><p class="mt-3 text-sm text-white/65">Structured for rich snippets, internal linking, and long-form discoverability.</p><div class="mt-6 text-sm text-goldSoft">Open article →</div></article>
+        </div>
+        <div class="mt-8 grid gap-5 lg:grid-cols-1">
+          <form class="glass rounded-[1.75rem] p-6 max-w-3xl">
+            <div class="text-xs uppercase tracking-[0.3em] text-goldSoft">Newsletter signup</div>
+            <div class="mt-2 text-2xl font-semibold">Get intelligent weekly perspective.</div>
+            <div class="mt-5 flex flex-col gap-3 sm:flex-row">
+              <input type="email" placeholder="Email address" class="w-full rounded-full border border-white/10 bg-white/5 px-5 py-3 text-white placeholder:text-white/35 outline-none focus:border-gold/45" />
+              <button class="rounded-full bg-gold px-5 py-3 text-sm font-semibold uppercase tracking-[0.18em] text-navy">Subscribe</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section id="booking" class="px-6 py-20 lg:px-10">
+      <div class="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[.9fr_1.1fr]">
+        <div class="wealth-photo reveal rounded-[2rem] border border-white/10 p-8">
+          <div class="glass max-w-md rounded-[1.5rem] p-6">
+            <div class="text-xs uppercase tracking-[0.3em] text-goldSoft">Appointment booking</div>
+            <h2 class="mt-3 font-display text-5xl text-white">A concierge-level scheduling experience.</h2>
+            <p class="mt-4 text-white/72">Designed for Calendly embed or a custom booking engine with consultation selection, Zoom integration, automated reminders, and a polished mobile flow.</p>
+            <div class="mt-6 grid gap-3 text-sm text-white/75">
+              <div>• Consultation selection and intake questionnaire</div>
+              <div>• Zoom or in-person calendar coordination</div>
+              <div>• Automated confirmations and reminder emails</div>
+              <div>• Mobile-optimized booking with minimal friction</div>
+            </div>
+          </div>
+        </div>
+        <div class="glass reveal rounded-[2rem] p-6 lg:p-8">
+          <div class="grid gap-4 md:grid-cols-2">
+            <label class="text-sm text-white/70">Full name<input type="text" class="mt-2 w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-white outline-none focus:border-gold/50" placeholder="Alex Morgan"></label>
+            <label class="text-sm text-white/70">Email<input type="email" class="mt-2 w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-white outline-none focus:border-gold/50" placeholder="alex@example.com"></label>
+            <label class="text-sm text-white/70">Consultation type<select class="mt-2 w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-white outline-none focus:border-gold/50"><option>Private wealth consultation</option><option>Business owner strategy session</option><option>Retirement planning review</option><option>Legacy and estate planning</option></select></label>
+            <label class="text-sm text-white/70">Preferred format<select class="mt-2 w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-white outline-none focus:border-gold/50"><option>Zoom</option><option>Phone</option><option>In person</option></select></label>
+            <label class="text-sm text-white/70 md:col-span-2">What prompted your outreach?<textarea rows="4" class="mt-2 w-full rounded-[1.5rem] border border-white/10 bg-white/5 px-4 py-3 text-white outline-none focus:border-gold/50" placeholder="Retirement readiness, tax planning, concentrated stock, business exit, family wealth strategy..."></textarea></label>
+          </div>
+          <div class="mt-6 grid gap-4 sm:grid-cols-3">
+            <div class="rounded-[1.5rem] border border-white/10 bg-white/5 p-4"><div class="text-xs uppercase tracking-[0.24em] text-white/45">Step 1</div><div class="mt-2 font-semibold">Select service</div></div>
+            <div class="rounded-[1.5rem] border border-white/10 bg-white/5 p-4"><div class="text-xs uppercase tracking-[0.24em] text-white/45">Step 2</div><div class="mt-2 font-semibold">Choose time</div></div>
+            <div class="rounded-[1.5rem] border border-white/10 bg-white/5 p-4"><div class="text-xs uppercase tracking-[0.24em] text-white/45">Step 3</div><div class="mt-2 font-semibold">Receive confirmation</div></div>
+          </div>
+          <button class="mt-6 w-full rounded-full bg-gold px-6 py-4 text-sm font-semibold uppercase tracking-[0.2em] text-navy">Schedule Your Private Consultation</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="experience" class="px-6 py-20 lg:px-10">
+      <div class="mx-auto max-w-7xl">
+        <div class="reveal grid gap-8 lg:grid-cols-[1fr_1fr] lg:items-center">
+          <div>
+            <p class="text-xs uppercase tracking-[0.35em] text-goldSoft">Client experience</p>
+            <h2 class="mt-3 font-display text-5xl text-white">What it feels like to work with OPUS WEALTH.</h2>
+            <div class="mt-6 space-y-5 text-white/72">
+              <p>White-glove service that respects your time, your complexity, and the emotional significance of what you have built.</p>
+              <p>Strategic planning that connects taxes, investments, retirement, risk, and family outcomes rather than treating them as separate conversations.</p>
+              <p>Proactive communication, regular reviews, and a legacy mindset that helps families think beyond the next quarter.</p>
+            </div>
+          </div>
+          <div class="grid gap-5">
+            <div class="glass rounded-[1.75rem] p-6"><div class="text-xs uppercase tracking-[0.28em] text-white/45">01 / Strategic clarity</div><div class="mt-3 text-2xl font-semibold">You understand exactly what your plan is designed to do.</div></div>
+            <div class="glass rounded-[1.75rem] p-6"><div class="text-xs uppercase tracking-[0.28em] text-white/45">02 / Proactive partnership</div><div class="mt-3 text-2xl font-semibold">The right conversations happen before problems become expensive.</div></div>
+            <div class="glass rounded-[1.75rem] p-6"><div class="text-xs uppercase tracking-[0.28em] text-white/45">03 / Family perspective</div><div class="mt-3 text-2xl font-semibold">Your wealth is managed in the context of values, relationships, and generational impact.</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="px-6 py-20 lg:px-10">
+      <div class="mx-auto max-w-7xl">
+        <div class="reveal flex items-end justify-between gap-6">
+          <div>
+            <p class="text-xs uppercase tracking-[0.35em] text-goldSoft">Testimonials</p>
+            <h2 class="mt-3 font-display text-5xl text-white">Confidence, clarity, and long-term trust.</h2>
+          </div>
+        </div>
+        <div class="mt-10 grid gap-5 lg:grid-cols-3">
+          <blockquote class="testimonial-card glass rounded-[1.75rem] p-6"><p class="text-lg leading-8 text-white/82">“For the first time, our investment strategy, tax planning, and retirement decisions feel coordinated. We finally have clarity.”</p><footer class="mt-6 text-sm uppercase tracking-[0.24em] text-goldSoft">Entrepreneur family</footer></blockquote>
+          <blockquote class="testimonial-card glass rounded-[1.75rem] p-6"><p class="text-lg leading-8 text-white/82">“Their process helped us see how inflation and taxes were quietly reducing our future options. That changed how we plan.”</p><footer class="mt-6 text-sm uppercase tracking-[0.24em] text-goldSoft">Executive household</footer></blockquote>
+          <blockquote class="testimonial-card glass rounded-[1.75rem] p-6"><p class="text-lg leading-8 text-white/82">“The relationship feels deeply personal, but the strategy is sophisticated. That combination is rare.”</p><footer class="mt-6 text-sm uppercase tracking-[0.24em] text-goldSoft">Business owner</footer></blockquote>
+        </div>
+      </div>
+    </section>
+
+    <section class="px-6 pb-24 pt-8 lg:px-10">
+      <div class="mx-auto max-w-7xl reveal rounded-[2.5rem] border border-gold/25 bg-[linear-gradient(135deg,rgba(255,255,255,0.08),rgba(255,255,255,0.03))] p-8 shadow-glow lg:p-12">
+        <div class="grid gap-8 lg:grid-cols-[1.1fr_.9fr] lg:items-center">
+          <div>
+            <p class="text-xs uppercase tracking-[0.35em] text-goldSoft">Final invitation</p>
+            <h2 class="mt-3 max-w-3xl font-display text-5xl text-white">Your Wealth Should Work Harder Than Inflation.</h2>
+            <p class="mt-5 max-w-2xl text-white/75">Build a strategy designed to protect your future, preserve your purchasing power, and create lasting impact for generations.</p>
+          </div>
+          <div class="flex flex-col items-start gap-4 lg:items-end">
+            <a href="#booking" class="inline-flex rounded-full bg-gold px-7 py-4 text-sm font-semibold uppercase tracking-[0.2em] text-navy">Schedule Your Private Consultation</a>
+            <div class="text-sm text-white/55">Designed for business owners, entrepreneurs, executives, and affluent families.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-white/10 px-6 py-8 lg:px-10">
+    <div class="mx-auto flex max-w-7xl flex-col gap-4 text-sm text-white/55 md:flex-row md:items-center md:justify-between">
+      <div>© 2026 OPUS WEALTH. Premium wealth strategy, retirement planning, tax-aware guidance, and legacy advisory.</div>
+      <div class="flex gap-5"><a href="#insights">Insights</a><a href="#services">Services</a><a href="#booking">Contact</a></div>
+    </div>
+  </footer>
+
+  <script>
+    const fmtCurrency = n => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(n);
+    const fmtPercent = n => `${Math.round(n)}%`;
+    const gold = 'rgba(229, 199, 138, 1)';
+    const goldSoft = 'rgba(200, 169, 107, 0.45)';
+    const white = 'rgba(255,255,255,0.82)';
+    const muted = 'rgba(255,255,255,0.34)';
+
+    function chartGradient(ctx, area, c1, c2) {
+      const g = ctx.createLinearGradient(0, area.bottom, 0, area.top);
+      g.addColorStop(0, c1);
+      g.addColorStop(1, c2);
+      return g;
+    }
+
+    let heroChart, retirementChart, incomeChart, inflationChart, taxChart;
+
+    function makeHeroChart() {
+      const ctx = document.getElementById('heroChart').getContext('2d');
+      const labels = ['Now', '5Y', '10Y', '15Y', '20Y'];
+      heroChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels,
+          datasets: [{
+            data: [2.1, 3.0, 4.6, 6.7, 9.2],
+            borderColor: gold,
+            borderWidth: 2,
+            tension: .35,
+            pointRadius: 0,
+            fill: true,
+            backgroundColor: (context) => {
+              const {ctx, chartArea} = context.chart;
+              if (!chartArea) return 'rgba(200,169,107,.08)';
+              return chartGradient(ctx, chartArea, 'rgba(200,169,107,.28)', 'rgba(200,169,107,0)');
+            }
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { display: false }, tooltip: { enabled: true, backgroundColor: '#08172B', borderColor: 'rgba(229,199,138,.25)', borderWidth: 1 } },
+          scales: {
+            x: { ticks: { color: muted }, grid: { color: 'rgba(255,255,255,.05)' } },
+            y: { ticks: { color: muted, callback: v => '$' + v + 'M' }, grid: { color: 'rgba(255,255,255,.05)' } }
+          }
+        }
+      });
+    }
+
+    function runRetirementCalculator() {
+      const currentAge = +document.getElementById('currentAge').value;
+      const retireAge = +document.getElementById('retireAge').value;
+      const annualIncome = +document.getElementById('annualIncome').value;
+      const annualSavings = +document.getElementById('annualSavings').value;
+      const growthRate = +document.getElementById('growthRate').value / 100;
+      const inflationRate = +document.getElementById('inflationRate').value / 100;
+      const spendTarget = +document.getElementById('spendTarget').value;
+      const years = Math.max(retireAge - currentAge, 1);
+      let balance = 0;
+      const balances = [];
+      const labels = [];
+      for (let i = 0; i <= years; i++) {
+        if (i > 0) balance = balance * (1 + growthRate) + annualSavings;
+        balances.push(balance);
+        labels.push(currentAge + i);
+      }
+      const projected = balances[balances.length - 1];
+      const purchasingPower = projected / Math.pow(1 + inflationRate, years);
+      const realRate = ((1 + growthRate) / (1 + inflationRate)) - 1;
+      const safeWithdrawal = projected * 0.04;
+      const realIncome = safeWithdrawal / Math.pow(1 + inflationRate, years);
+      let score = 55;
+      if (annualSavings / annualIncome > 0.18) score += 12;
+      if (realRate > 0.03) score += 10;
+      if (years >= 20) score += 10;
+      if (realIncome >= spendTarget * 0.85) score += 10;
+      if (realIncome >= spendTarget) score += 8;
+      score = Math.min(98, Math.max(42, Math.round(score)));
+
+      document.getElementById('projectedBalance').textContent = fmtCurrency(projected);
+      document.getElementById('purchasingPower').textContent = fmtCurrency(purchasingPower);
+      document.getElementById('probability').textContent = fmtPercent(score);
+
+      const spendLabels = ['Target spending', 'Estimated sustainable', 'Gap'];
+      const sustainableGap = Math.max(spendTarget - realIncome, 0);
+
+      if (retirementChart) retirementChart.destroy();
+      if (incomeChart) incomeChart.destroy();
+
+      const rCtx = document.getElementById('retirementChart').getContext('2d');
+      retirementChart = new Chart(rCtx, {
+        type: 'line',
+        data: {
+          labels,
+          datasets: [{
+            label: 'Projected balance',
+            data: balances,
+            borderColor: gold,
+            borderWidth: 2.2,
+            pointRadius: 0,
+            tension: .34,
+            fill: true,
+            backgroundColor: (context) => {
+              const {ctx, chartArea} = context.chart;
+              if (!chartArea) return 'rgba(200,169,107,.1)';
+              return chartGradient(ctx, chartArea, 'rgba(200,169,107,.32)', 'rgba(200,169,107,0)');
+            }
+          }]
+        },
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          plugins: { legend: { display: false } },
+          scales: {
+            x: { ticks: { color: muted, maxTicksLimit: 6 }, grid: { color: 'rgba(255,255,255,.04)' } },
+            y: { ticks: { color: muted, callback: v => '$' + (v/1000000).toFixed(1) + 'M' }, grid: { color: 'rgba(255,255,255,.05)' } }
+          }
+        }
+      });
+
+      const iCtx = document.getElementById('incomeChart').getContext('2d');
+      incomeChart = new Chart(iCtx, {
+        type: 'bar',
+        data: {
+          labels: spendLabels,
+          datasets: [{
+            data: [spendTarget, realIncome, sustainableGap],
+            backgroundColor: ['rgba(255,255,255,.24)', 'rgba(229,199,138,.8)', 'rgba(215,84,84,.68)'],
+            borderRadius: 14
+          }]
+        },
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          plugins: { legend: { display: false } },
+          scales: {
+            x: { ticks: { color: muted }, grid: { display: false } },
+            y: { ticks: { color: muted, callback: v => '$' + (v/1000) + 'k' }, grid: { color: 'rgba(255,255,255,.05)' } }
+          }
+        }
+      });
+    }
+
+    function makeTaxPowerCharts() {
+      const inflCtx = document.getElementById('inflationChart').getContext('2d');
+      const years = Array.from({length: 21}, (_, i) => i);
+      const nominal = years.map(y => 100 * Math.pow(1.06, y));
+      const real = years.map(y => nominal[y] / Math.pow(1.03, y));
+      inflationChart = new Chart(inflCtx, {
+        type: 'line',
+        data: {
+          labels: years.map(y => y === 0 ? 'Today' : `Year ${y}`),
+          datasets: [
+            { label: 'Nominal value', data: nominal, borderColor: 'rgba(255,255,255,.55)', pointRadius: 0, tension: .3, borderDash: [7,5] },
+            { label: 'Real purchasing power', data: real, borderColor: gold, pointRadius: 0, tension: .3, fill: true, backgroundColor: 'rgba(200,169,107,.12)' }
+          ]
+        },
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          plugins: { legend: { labels: { color: white } } },
+          scales: {
+            x: { ticks: { color: muted, maxTicksLimit: 5 }, grid: { color: 'rgba(255,255,255,.04)' } },
+            y: { ticks: { color: muted, callback: v => Math.round(v) }, grid: { color: 'rgba(255,255,255,.05)' } }
+          }
+        }
+      });
+
+      const taxCtx = document.getElementById('taxChart').getContext('2d');
+      taxChart = new Chart(taxCtx, {
+        type: 'bar',
+        data: {
+          labels: ['Unmanaged strategy', 'Optimized strategy'],
+          datasets: [
+            { label: 'After-tax wealth', data: [2840000, 3560000], backgroundColor: ['rgba(255,255,255,.22)', 'rgba(229,199,138,.82)'], borderRadius: 18 },
+            { label: 'Lost to taxes & drag', data: [810000, 420000], backgroundColor: ['rgba(214,93,93,.52)', 'rgba(95,107,122,.55)'], borderRadius: 18 }
+          ]
+        },
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          plugins: { legend: { labels: { color: white } } },
+          scales: {
+            x: { ticks: { color: muted }, stacked: true, grid: { display: false } },
+            y: { ticks: { color: muted, callback: v => '$' + (v/1000000).toFixed(1) + 'M' }, stacked: true, grid: { color: 'rgba(255,255,255,.05)' } }
+          }
+        }
+      });
+    }
+
+    function setupReveal() {
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) entry.target.classList.add('active');
+        });
+      }, { threshold: 0.15 });
+      document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      makeHeroChart();
+      runRetirementCalculator();
+      makeTaxPowerCharts();
+      setupReveal();
+      document.getElementById('calcBtn').addEventListener('click', runRetirementCalculator);
+    });
+  </script>
+</body>
+</html>
