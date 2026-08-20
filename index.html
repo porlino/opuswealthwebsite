@@ -134,10 +134,18 @@
     .logo-shell img { object-fit: contain; }
     .luxury-photo {
       background:
-        linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02)),
+        linear-gradient(180deg, rgba(7,27,52,0.12) 0%, rgba(7,27,52,0.28) 48%, rgba(7,27,52,0.88) 100%),
         url('https://picsum.photos/seed/opus-wealth-luxury/1200/900');
       background-size: cover;
       background-position: center;
+      min-height: 26rem;
+      display: flex;
+      align-items: flex-end;
+    }
+    .photo-caption {
+      background: rgba(7,27,52,0.94);
+      border: 1px solid rgba(229,199,138,0.28);
+      box-shadow: 0 18px 45px rgba(0,0,0,0.38);
     }
     .wealth-photo {
       background:
@@ -327,10 +335,10 @@
           <p class="text-xs uppercase tracking-[0.35em] text-goldSoft">Retirement calculator</p>
           <h2 class="mt-3 font-display text-5xl text-white">Plan retirement with purchasing power in view.</h2>
           <p class="mt-5 max-w-xl text-white/70">This planner estimates future balance, inflation-adjusted purchasing power, and a simple confidence score based on savings consistency, timeline, and real return assumptions.</p>
-          <div class="mt-8 luxury-photo rounded-[2rem] border border-white/10 p-8">
-            <div class="max-w-sm glass rounded-[1.5rem] p-5">
-              <div class="text-xs uppercase tracking-[0.3em] text-white/45">Planning philosophy</div>
-              <p class="mt-3 text-sm leading-7 text-white/80">Sophisticated planning should feel calming, not spreadsheet-heavy. Every number here is presented with editorial clarity and decision-ready framing.</p>
+          <div class="mt-8 luxury-photo rounded-[2rem] border border-white/10 p-6 sm:p-8">
+            <div class="photo-caption max-w-md rounded-[1.5rem] p-5 sm:p-6">
+              <div class="text-xs uppercase tracking-[0.3em] text-goldSoft">Planning philosophy</div>
+              <p class="mt-3 text-sm leading-7 text-white">Sophisticated planning should feel calming, not spreadsheet-heavy. Every number is presented with clarity and decision-ready context.</p>
             </div>
           </div>
         </div>
